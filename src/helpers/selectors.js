@@ -32,7 +32,13 @@ const getInterview = (state, interview) => {
 };
 
 const getInterviewersForDay = (state, day) => {
-
-};
+  let interviewers = [];
+  for (let item in state.days) {
+    if (state.days[item].name === day) {
+      interviewers = state.days[item].interviewers;
+    }
+  }
+  return interviewers;
+}
 
 export { getAppointmentsForDay, getInterview, getInterviewersForDay };
