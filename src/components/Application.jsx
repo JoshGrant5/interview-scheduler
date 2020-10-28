@@ -16,8 +16,7 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
-
-  // useEffect on this?
+  
   const appointments = getAppointmentsForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {

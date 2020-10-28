@@ -31,4 +31,8 @@ const getInterview = (state, interview) => {
   return info;
 };
 
-export { getAppointmentsForDay, getInterview };
+const getInterviewersForDay = (state, day) => {
+
+};
+
+export { getAppointmentsForDay, getInterview, getInterviewersForDay };
