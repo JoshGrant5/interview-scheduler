@@ -4,7 +4,8 @@ import "components/Application.scss";
 
 import DayList from "components/DayList";
 import Appointment from "components/Appointment/index";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+
+import { getAppointmentsForDay, getInterview } from "helpers/selectors.js";
 
 const axios = require('axios');
 
@@ -17,6 +18,7 @@ export default function Application(props) {
     interviewers: {}
   });
 
+  // useEffect on this?
   const appointments = getAppointmentsForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {
@@ -43,12 +45,6 @@ export default function Application(props) {
     });
   })
 
-  const appointment = appointments.map(appt => {
-    return (
-      <Appointment key={appt.id} {...appt} />
-    )
-  })
-
   return (
     <main className="layout">
       <section className="sidebar">
@@ -72,7 +68,7 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {appointment}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
