@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import "components/Application.scss";
-
 import DayList from "components/DayList";
 import Appointment from "components/Appointment/index";
-
 import { getAppointmentsForDay, getInterview } from "helpers/selectors.js";
+
+import "components/Application.scss";
 
 const axios = require('axios');
 
@@ -74,3 +73,8 @@ export default function Application(props) {
     </main>
   );
 }
+
+// Difference between axios and ajax?
+
+// should the other functions be inside a useEffect as well?
+
