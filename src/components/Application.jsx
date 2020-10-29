@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import DayList from "components/DayList";
 import Appointment from "components/Appointment/index";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors.js";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors.js";
 
 import "components/Application.scss";
 
@@ -16,22 +16,6 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
-  
-  const appointments = getAppointmentsForDay(state, state.day);
-
-  const schedule = appointments.map((appointment) => {
-    const interview = getInterview(state, appointment.interview);
-    return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-      />
-    );
-  });
-
-  const setDay = day => setState({ ...state, day });
 
   useEffect(() => {
     Promise.all([
@@ -42,6 +26,23 @@ export default function Application(props) {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
     });
   })
+
+  const setDay = day => setState({ ...state, day });
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
+
+  const schedule = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+        interviewers={interviewers}
+      />
+    );
+  });
 
   return (
     <main className="layout">
@@ -72,8 +73,3 @@ export default function Application(props) {
     </main>
   );
 }
-
-// Difference between axios and ajax?
-
-// should the other functions be inside a useEffect as well?
-
