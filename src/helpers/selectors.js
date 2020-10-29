@@ -32,10 +32,16 @@ const getInterview = (state, interview) => {
 };
 
 const getInterviewersForDay = (state, day) => {
-  let interviewers = [];
+  let schedule = [];
+  let interviewers = []
   for (let item in state.days) {
     if (state.days[item].name === day) {
-      interviewers = state.days[item].interviewers;
+      schedule = state.days[item].interviewers;
+    }
+  }
+  for (let interviewer in state.interviewers) {
+    if (schedule.includes(state.interviewers[interviewer].id)) {
+      interviewers.push(state.interviewers[interviewer]);
     }
   }
   return interviewers;
