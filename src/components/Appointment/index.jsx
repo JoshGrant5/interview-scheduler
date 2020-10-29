@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
@@ -39,6 +39,15 @@ export default function Appointment(props) {
   const confirmDelete = () => {
     transition(CONFIRM);
   };
+
+  const [editName, setEditName] = useState('');
+  const [editInterviewer, setEditInterviewer] = useState(null);
+
+  const edit = (name, interviewer) => {
+    setEditName(name);
+    setEditInterviewer(interviewer);
+    transition(CREATE);
+  }
   
   return (
     <article className="appointment">
@@ -50,6 +59,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onEdit={edit}
           onDelete={confirmDelete}
         />
       )}
@@ -63,9 +73,9 @@ export default function Appointment(props) {
       {mode === DELETING && (<Status message="Deleting" />)}
       {mode === CREATE && (
         <Form
-          // name={props.name}
+          name={editName}
           interviewers={props.interviewers}
-          // value={props.value}
+          value={editInterviewer}
           onSave={save}
           onCancel={() => back()} 
         />
