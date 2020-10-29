@@ -20,6 +20,19 @@ const useApplicationData = () => {
     });
   }, [])
 
+  const adjustSpots = (id, up) => {
+    const days = [...state.days];
+    let dayID;
+    let spots;
+    for (let day of state.days) {
+      if (day.appointments.includes(id)) {
+        up ? [dayID, spots] = [day.id - 1, day.spots + 1] : [dayID, spots] = [day.id - 1, day.spots - 1];
+      }
+    }
+    days[dayID].spots = spots;
+    return days;
+  };
+
   const bookInterview = (id, interview, show) => {
     const appointment = {
       ...state.appointments[id],
@@ -31,7 +44,7 @@ const useApplicationData = () => {
     };
     axios.put(`/api/appointments/${id}`, { interview })
     .then(() => {
-      setState({...state, appointments});
+      setState({...state, days: adjustSpots(id, false), appointments});
       show("SHOW");
     })
     .catch(() => show("ERROR_S", true));
@@ -48,7 +61,7 @@ const useApplicationData = () => {
     };
     axios.delete(`/api/appointments/${id}`)
     .then(() => {
-      setState({...state, appointments});
+      setState({...state, days: adjustSpots(id, true), appointments});
       empty("EMPTY");
     })
     .catch(() => empty("ERROR_D", true));
