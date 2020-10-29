@@ -19,6 +19,15 @@ export default function Appointment(props) {
 
   const onAdd = () => {
     transition(CREATE);
+  };
+
+  const save = (name, interviewer) => {
+    const interview = {
+      student: name,
+      interviewer
+    };
+
+    props.bookInterview(props.id, interview);
   }
   
   return (
@@ -38,7 +47,7 @@ export default function Appointment(props) {
           // name={props.name}
           interviewers={props.interviewers}
           // value={props.value}
-          // onSave={props.onSave}
+          onSave={save}
           onCancel={() => back()} 
         />
       )}
