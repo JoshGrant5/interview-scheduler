@@ -41,6 +41,7 @@ export default function Application(props) {
       setState({...state, appointments});
       show("SHOW");
     })
+    .catch(() => show("ERROR_S", true));
   };
 
   const cancelInterview = (id, empty) => {
@@ -57,6 +58,7 @@ export default function Application(props) {
       setState({...state, appointments});
       empty("EMPTY");
     })
+    .catch(() => empty("ERROR_D", true));
   };
 
   const setDay = day => setState({ ...state, day });
