@@ -13,10 +13,14 @@ function reducer(state, action) {
       return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
 
     case SET_INTERVIEW: {
-      
-
-
+    
       const interview = action.interview ? {...action.interview} : null;
+
+      const checkAppointment = {...state.appointments[action.id].interview};
+      let editOrDelete;
+      if (Object.keys(checkAppointment).length === 2) {
+        editOrDelete = true;
+      }
 
       const appointment = {
         ...state.appointments[action.id],
@@ -31,13 +35,16 @@ function reducer(state, action) {
       let spots;
       for (let day of days) {
         if (day.appointments.includes(action.id)) {
-
-          interview ? [dayID, spots] = [day.id - 1, day.spots - 1] : [dayID, spots] = [day.id - 1, day.spots + 1];
-          
-          
+          if (editOrDelete) { 
+            // if interview is not null, we are editing. If null, we are deleting
+            interview ? [dayID, spots] = [day.id - 1, day.spots] : [dayID, spots] = [day.id - 1, day.spots + 1]
+          } else {
+            [dayID, spots] = [day.id - 1, day.spots - 1] // Creating a new appointment (remove spot)
+          }
         }
       }
       days[dayID].spots = spots;
+
       return { ...state, days, appointments }
     }
     default:
@@ -75,6 +82,7 @@ const useApplicationData = () => {
     socket.onmessage = event => {
       const data = JSON.parse(event.data);
       if (data.type === SET_INTERVIEW) {
+
         dispatch({ type: SET_INTERVIEW, id: data.id, interview: data.interview });
       }
     };
