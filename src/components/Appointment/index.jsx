@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
@@ -25,32 +25,41 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  const [editName, setEditName] = useState('');
+  const [editInterviewer, setEditInterviewer] = useState(null);
+
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
     transition(SAVING)
-    props.bookInterview(props.id, interview, transition);
+    props.bookInterview(props.id, interview)
+    .then(() => transition(SHOW))
+    .catch(() => transition("ERROR_S", true));
   };
-
-  const deleteInterview = () => {
-    transition(DELETING);
-    props.cancelInterview(props.id, transition);
-  };
-
-  const confirmDelete = () => {
-    transition(CONFIRM);
-  };
-
-  const [editName, setEditName] = useState('');
-  const [editInterviewer, setEditInterviewer] = useState(null);
 
   const edit = (name, interviewer) => {
     setEditName(name);
     setEditInterviewer(interviewer);
     transition(CREATE);
   }
+
+  const deleteInterview = () => {
+    transition(DELETING);
+    props.cancelInterview(props.id)
+    .then(() => transition(EMPTY))
+    .catch(() => transition("ERROR_S", true));
+  };
+
+   useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+     transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+     transition(EMPTY);
+    }
+   }, [props.interview, transition, mode]);
   
   return (
     <article className="appointment">
@@ -58,12 +67,12 @@ export default function Appointment(props) {
         time={props.time}
       />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && (
+      {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onEdit={edit}
-          onDelete={confirmDelete}
+          onDelete={() => transition(CONFIRM)}
         />
       )}
       {mode === SAVING && (<Status message="Saving" />)}
