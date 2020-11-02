@@ -37,9 +37,9 @@ function reducer(state, action) {
         if (day.appointments.includes(action.id)) {
           if (editOrDelete) { 
             // if interview is not null, we are editing. If null, we are deleting
-            interview ? [dayID, spots] = [day.id - 1, day.spots] : [dayID, spots] = [day.id - 1, day.spots + 1]
+            interview ? [dayID, spots] = [day.id - 1, day.spots] : [dayID, spots] = [day.id - 1, day.spots + 1];
           } else {
-            [dayID, spots] = [day.id - 1, day.spots - 1] // Creating a new appointment (remove spot)
+            [dayID, spots] = [day.id - 1, day.spots - 1]; // Creating a new appointment (remove spot)
           }
         }
       }
