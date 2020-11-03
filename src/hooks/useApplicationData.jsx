@@ -30,6 +30,7 @@ function reducer(state, action) {
         ...state.appointments,
         [action.id]: appointment
       };
+      
       const days = [...state.days];
       let dayID;
       let spots;
@@ -43,7 +44,7 @@ function reducer(state, action) {
           }
         }
       }
-      days[dayID].spots = spots;
+      days[dayID] = {...days[dayID], spots: spots};
 
       return { ...state, days, appointments }
     }
@@ -74,31 +75,31 @@ const useApplicationData = () => {
     });
   }, []);
 
-  // WebSocket
-  useEffect(() => {
-    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-    socket.onopen = () => socket.send('ping');
+  //! WebSocket - Commented out for testing purposes. LHL did not design Compass tests to work with webSocket running
+  // useEffect(() => {
+  //   const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+  //   socket.onopen = () => socket.send('ping');
 
-    socket.onmessage = event => {
-      const data = JSON.parse(event.data);
-      if (data.type === SET_INTERVIEW) {
+  //   socket.onmessage = event => {
+  //     const data = JSON.parse(event.data);
+  //     if (data.type === SET_INTERVIEW) {
 
-        dispatch({ type: SET_INTERVIEW, id: data.id, interview: data.interview });
-      }
-    };
+  //       dispatch({ type: SET_INTERVIEW, id: data.id, interview: data.interview });
+  //     }
+  //   };
     
-    return () => socket.close();
-  }, []);
+  //   return () => socket.close();
+  // }, []);
 
   const bookInterview = (id, interview) => {
-    return axios.put(`/api/appointments/${id}`, { interview });
+    return axios.put(`/api/appointments/${id}`, { interview })
+    .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
   };
 
-  const cancelInterview = (id) => {
-    return axios.delete(`/api/appointments/${id}`);
+  const cancelInterview = (id, interview = null) => {
+    return axios.delete(`/api/appointments/${id}`)
+    .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
   };
-
-  
 
   return { state, setDay, bookInterview, cancelInterview }
 }

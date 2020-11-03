@@ -84,12 +84,21 @@ export default {
   }),
 
   put: jest.fn((data) => {
+    //! Test data for webSocket - LHL did not design Compass tests to work with webSocket running
     // We are testing booking an appointment on Monday, id = 1
-    fixtures.appointments[1] = {
-      interview: {student: data.student, interviewer: data.interviewer}
-    }
-    fixtures.days[0].spots = 0;
+    // fixtures.appointments[1] = {
+    //   interview: {student: data.student, interviewer: data.interviewer}
+    // }
+    // fixtures.days[0].spots -= 1;
+    if (fixtures.days[0].spots === 0) { fixtures.days[0].spots = 1 };
+    return Promise.resolve({
+      status: 204, 
+      statusText: "No Content",
+    })
+  }),
 
+  delete: jest.fn(() => {
+    if (fixtures.days[0].spots === 0) { fixtures.days[0].spots = 1 };
     return Promise.resolve({
       status: 204, 
       statusText: "No Content",

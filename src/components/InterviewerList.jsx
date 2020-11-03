@@ -3,7 +3,7 @@ import "components/InterviewerList.scss";
 import InterviewerListItem from "components/InterviewerListItem";
 import "components/InterviewerListItem.scss";
 
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
 
 const InterviewerList = props => {
 
