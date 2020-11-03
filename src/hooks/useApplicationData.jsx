@@ -28,7 +28,7 @@ const useApplicationData = () => {
     });
   }, []);
 
-  //! WebSocket - Commented out for testing purposes. LHL did not design Compass tests to work with webSocket running
+  //* WebSocket - Commented out for testing purposes. LHL did not design Compass tests to work with webSocket running
   // useEffect(() => {
   //   const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
   //   socket.onopen = () => socket.send('ping');
@@ -40,20 +40,20 @@ const useApplicationData = () => {
   //       dispatch({ type: SET_INTERVIEW, id: data.id, interview: data.interview });
   //     }
   //   };
-    
   //   return () => socket.close();
   // }, []);
 
   const bookInterview = (id, interview) => {
     return axios.put(`/api/appointments/${id}`, { interview })
+    // remove .then if using webSocket
     .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
   };
 
   const cancelInterview = (id, interview = null) => {
     return axios.delete(`/api/appointments/${id}`)
+    // remove .then if using webSocket
     .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
   };
-
   return { state, setDay, bookInterview, cancelInterview }
 }
 
