@@ -1,8 +1,9 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, prettyDOM, getByText, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, prettyDOM, getByText, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, getByRole } from "@testing-library/react";
 
 import Application from "components/Application";
+import axios from "__mocks__/axios";
 
 afterEach(cleanup);
 
@@ -15,19 +16,40 @@ describe('Application', () => {
   });
 
   it('loads data, books an interview and reduces the spots remaining for the first day by 1', async () => {
-    const { container } = render(<Application />);
+    let { container, rerender } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
-    const appointments = getAllByTestId(container, "appointment");
-    const appointment = appointments[0];
+    let appointments = getAllByTestId(container, "appointment");
+    let appointment = appointments[0];
 
     fireEvent.click(getByAltText(appointment, "Add"));
+
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lydia Miller-Jones" }
     });
+
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     fireEvent.click(getByText(appointment, "Save"));
-    console.log(prettyDOM(appointment));
+
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+
+    axios.put({
+      student: "Lydia Miller-Jones"
+    })
+    .then(() => {
+      console.log(prettyDOM(container))
+    })
+
+    rerender(<Application />);
+
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
+
+    // await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+    
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+   
   });
 })

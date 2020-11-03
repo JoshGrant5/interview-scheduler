@@ -82,10 +82,17 @@ export default {
       });
     }
   }),
-  put : jest.fn(() => {
+
+  put: jest.fn((data) => {
+    // We are testing booking an appointment on Monday, id = 1
+    fixtures.appointments[1] = {
+      interview: {student: data.student, interviewer: data.interviewer}
+    }
+    fixtures.days[0].spots = 0;
+
     return Promise.resolve({
       status: 204, 
-      statusText: "No Content"
+      statusText: "No Content",
     })
   })
 };
