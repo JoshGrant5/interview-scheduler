@@ -34,11 +34,9 @@ const useApplicationData = () => {
   useEffect(() => {
     const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
     socket.onopen = () => socket.send('ping');
-
     socket.onmessage = event => {
       const data = JSON.parse(event.data);
       if (data.type === SET_INTERVIEW) {
-
         dispatch({ type: SET_INTERVIEW, id: data.id, interview: data.interview });
       }
     };
