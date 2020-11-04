@@ -19,7 +19,7 @@ const getAppointmentsForDay = (state, day) => {
 const getInterview = (state, interview) => {
   let info = {};
   if (!interview) {
-    return null
+    return null;
   }
   info["student"] = interview.student;
   info["interviewer"] = {id: interview.interviewer};
@@ -35,7 +35,7 @@ const getInterview = (state, interview) => {
 // Returns an array of interviewers for the day
 const getInterviewersForDay = (state, day) => {
   let schedule = [];
-  let interviewers = []
+  let interviewers = [];
   for (let item in state.days) {
     if (state.days[item].name === day) {
       schedule = state.days[item].interviewers;

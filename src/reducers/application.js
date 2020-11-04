@@ -6,10 +6,10 @@ const SET_INTERVIEW = "SET_INTERVIEW";
 export default function reducer(state, action) {
   switch (action.type) {
     case SET_DAY:
-      return { ...state, day: action.day }
+      return { ...state, day: action.day };
 
     case SET_APPLICATION_DATA:
-      return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
+      return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers };
 
     case SET_INTERVIEW: {
       const interview = action.interview ? {...action.interview} : null;
@@ -46,8 +46,8 @@ export default function reducer(state, action) {
         return days;
       }
 
-      return { ...state, days: adjustedSpots(), appointments }
-      
+      return { ...state, days: adjustedSpots(), appointments };
+
     }
     default:
       throw new Error(

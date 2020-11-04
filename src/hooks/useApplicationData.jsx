@@ -7,7 +7,9 @@ import reducer, {
   SET_INTERVIEW
 } from "reducers/application";
 
+// Custom hook for axios requests, websocket connection, and setting state using useReducer
 const useApplicationData = () => {
+
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -45,13 +47,13 @@ const useApplicationData = () => {
 
   const bookInterview = (id, interview) => {
     return axios.put(`/api/appointments/${id}`, { interview })
-    // remove .then if using webSocket
+    // Uncomment below if websocket is not running
     // .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
   };
 
   const cancelInterview = (id, interview = null) => {
     return axios.delete(`/api/appointments/${id}`)
-    // remove .then if using webSocket
+    // Uncomment below if websocket is not running
     // .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
   };
   return { state, setDay, bookInterview, cancelInterview }

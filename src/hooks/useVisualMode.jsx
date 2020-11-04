@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
+// Custom hook for transitioning Empty, Show, Create, Delete, Confirm, Error, Status components
 const useVisualMode = initial => {
+  
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
