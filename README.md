@@ -10,21 +10,17 @@ Testing for this project was done with Jest, Cypress, and Storybook Visual Testb
 
 # Visuals
 
+### Responsive navbar showing the number of spots available for each day.
 ![view days](https://github.com/JoshGrant5/interview-scheduler/blob/master/public/images/gifs/view-days.gif) 
 
-#### Responsive navbar showing the number of spots available for each day.
-
+### Select a timeslot to book an appointment and decrese spots remaining for that day.
 ![book appointment](https://github.com/JoshGrant5/interview-scheduler/blob/master/public/images/gifs/book-appointment.gif) 
 
-#### Select a timeslot to book an appointment and decrese spots remaining for that day.
-
+### Edit an existing appointment with no change to spots remaining for that day.
 ![edit appointment](https://github.com/JoshGrant5/interview-scheduler/blob/master/public/images/gifs/edit-appointment.gif) 
 
-#### Edit an existing appointment with no change to spots remaining for that day.
-
+### Delete an appointment and increase spots remaining for that day.
 ![delete appointment](https://github.com/JoshGrant5/interview-scheduler/blob/master/public/images/gifs/delete-appointment.gif) 
-
-#### Delete an appointment and increase spots remaining for that day.
 
 # Setup
 
