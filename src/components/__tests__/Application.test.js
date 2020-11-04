@@ -16,7 +16,7 @@ describe('Application', () => {
     expect(getByText("Leopold Silvers")).toBeInTheDocument();
   });
 
-  it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
+  xit("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
     const { container } = render(<Application />);
     // Name is found after container renders
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -43,7 +43,7 @@ describe('Application', () => {
     await waitForElement(() => getByText(container, "Archie Cohen"));
   });
 
-  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  xit("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     const { container } = render(<Application />);
     // Name and appointment are found after container renders
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -63,7 +63,7 @@ describe('Application', () => {
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
 
-  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+  xit("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     const { container } = render(<Application />);
     // Name and appointment found after rendering
     await waitForElement(() => getByText(container, "Archie Cohen"));
