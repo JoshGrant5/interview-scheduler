@@ -3,6 +3,7 @@ import "components/InterviewerListItem.scss";
 
 import classNames from 'classnames';
 
+// InterviewerListItem component - individual interviewers, highlighted if selected
 export default function InterviewListItem(props) {
 
   const interviewerClass = classNames('interviewers__item', {

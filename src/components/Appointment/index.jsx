@@ -10,8 +10,10 @@ import Error from "components/Appointment/Error";
 
 import useVisualMode from "hooks/useVisualMode";
 
+// Appointment component - shows the appointments and slots for each day with applicable components
 export default function Appointment(props) {
 
+  // Different modes for transitioning between components 
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -28,6 +30,7 @@ export default function Appointment(props) {
   const [editName, setEditName] = useState('');
   const [editInterviewer, setEditInterviewer] = useState(null);
 
+  // Helper functions for saving, editing, and deleting an appointment
   const save = (name, interviewer) => {
     const interview = {
       student: name,
@@ -52,14 +55,15 @@ export default function Appointment(props) {
     .catch(() => transition("ERROR_S", true));
   };
 
-   useEffect(() => {
+  // If websocket is running, transition the mode state (for if multiple browsers are runnning)
+  useEffect(() => {
     if (props.interview && mode === EMPTY) {
      transition(SHOW);
     }
     if (props.interview === null && mode === SHOW) {
      transition(EMPTY);
     }
-   }, [props.interview, transition, mode]);
+  }, [props.interview, transition, mode]);
   
   return (
     <article className="appointment" data-testid="appointment">

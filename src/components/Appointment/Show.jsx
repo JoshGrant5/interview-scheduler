@@ -1,7 +1,7 @@
 import React from "react";
 
+// Show component - shows the booked appointments for each day
 export default function Show(props) {
-
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">

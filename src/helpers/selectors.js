@@ -1,5 +1,5 @@
+// Returns an array of appointments for that day
 const getAppointmentsForDay = (state, day) => {
-  //... returns an array of appointments for that day
   let appointments = [];
   let schedule = [];
   for (let item in state.days) {
@@ -15,6 +15,7 @@ const getAppointmentsForDay = (state, day) => {
   return appointments;
 }
 
+// Returns an interview object
 const getInterview = (state, interview) => {
   let info = {};
   if (!interview) {
@@ -31,6 +32,7 @@ const getInterview = (state, interview) => {
   return info;
 };
 
+// Returns an array of interviewers for the day
 const getInterviewersForDay = (state, day) => {
   let schedule = [];
   let interviewers = []

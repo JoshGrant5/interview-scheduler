@@ -3,6 +3,7 @@ import "components/DayListItem.scss";
 
 import classNames from 'classnames';
 
+// DayListItem component - lists the day and number of available spots remaining
 export default function DayListItem(props) {
 
   const dayClass = classNames('day-list__item', {

@@ -2,6 +2,7 @@ const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 
+// Reducer function to be exported to useApplicationData hook to use with the useReducer hook 
 export default function reducer(state, action) {
   switch (action.type) {
     case SET_DAY:
@@ -18,7 +19,7 @@ export default function reducer(state, action) {
       if (Object.keys(checkAppointment).length === 2) {
         editOrDelete = true;
       }
-
+      // Update the appointment/appointments with the given data
       const appointment = {
         ...state.appointments[action.id],
         interview: interview
@@ -27,23 +28,26 @@ export default function reducer(state, action) {
         ...state.appointments,
         [action.id]: appointment
       };
-      
       // Update the number of spots remaining in the day
-      const days = [...state.days];
-      let dayID;
-      let spots;
-      for (let day of days) {
-        if (day.appointments.includes(action.id)) {
-          if (editOrDelete) { 
-            interview ? [dayID, spots] = [day.id - 1, day.spots] : [dayID, spots] = [day.id - 1, day.spots + 1];
-          } else {
-            [dayID, spots] = [day.id - 1, day.spots - 1]; 
+      const adjustedSpots = () => {
+        const days = [...state.days];
+        let dayID;
+        let spots;
+        for (let day of days) {
+          if (day.appointments.includes(action.id)) {
+            if (editOrDelete) { 
+              [dayID, spots] = interview ? [day.id - 1, day.spots] : [day.id - 1, day.spots + 1];
+            } else {
+              [dayID, spots] = [day.id - 1, day.spots - 1]; 
+            }
           }
         }
+        days[dayID] = {...days[dayID], spots: spots};
+        return days;
       }
-      days[dayID] = {...days[dayID], spots: spots};
 
-      return { ...state, days, appointments }
+      return { ...state, days: adjustedSpots(), appointments }
+      
     }
     default:
       throw new Error(

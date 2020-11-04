@@ -5,6 +5,7 @@ import "components/InterviewerListItem.scss";
 
 import PropTypes from 'prop-types';
 
+// InterviewerList component - lists the interviewers available for each day when craeting apppointment
 const InterviewerList = props => {
 
   const interviewers = props.interviewers.map(interviewer => {

@@ -7,7 +7,9 @@ import useApplicationData from "hooks/useApplicationData";
 
 import "components/Application.scss";
 
+// Application component - main, passes down state to Appointment and DayList components
 export default function Application(props) {
+
   const {
     state,
     setDay,
