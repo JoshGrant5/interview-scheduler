@@ -30,7 +30,7 @@ export default function Appointment(props) {
   const [editName, setEditName] = useState('');
   const [editInterviewer, setEditInterviewer] = useState(null);
 
-  // Helper functions for saving, editing, canceling request, and deleting an appointment
+  // Helper functions for saving, editing, and deleting an appointment
   const save = (name, interviewer) => {
     const interview = {
       student: name,
@@ -47,10 +47,6 @@ export default function Appointment(props) {
     setEditInterviewer(interviewer);
     transition(CREATE);
   }
-
-  const cancel = () => {
-    transition(SHOW);
-  };
 
   const deleteInterview = () => {
     transition(DELETING);
@@ -87,7 +83,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
       <Confirm 
       message="Are you sure you'd like to delete?" 
-      onCancel={cancel}
+      onCancel={() => transition(SHOW)}
       onConfirm={deleteInterview}
       />
       )}
