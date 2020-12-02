@@ -2,7 +2,7 @@
 
 Interview Scheduler a single-page React application that allows users to book and cancel interviews using a WebSocket server to build a realtime experience. 
 
-[Click here](https://amazing-brattain-993e69.netlify.app/) to view application on Netlify.
+[Click here](https://lhl-scheduler-jg.netlify.app/) to view application on Netlify.
 
 Testing for this project was done with Jest, Cypress, and Storybook Visual Testbed.
 
