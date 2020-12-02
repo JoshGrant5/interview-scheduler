@@ -1,4 +1,4 @@
-# Interview Scheduler
+# LHL Scheduler
 
 Interview Scheduler a single-page React application that allows users to book and cancel interviews using a WebSocket server to build a realtime experience. 
 
