@@ -4,7 +4,7 @@ Interview Scheduler a single-page React application that allows users to book an
 
 [Click here](https://lhl-scheduler-jg.netlify.app/) to view application on Netlify.
 
-# Tech Stack:
+## Tech Stack:
 Front End:
 - React
 - Axios
@@ -22,7 +22,7 @@ Testing:
 
 *Created in Weeks 7 and 8 of Lighthouse Labs Web Development Bootcamp.*
 
-# Walkthrough
+## Walkthrough
 
 ### Responsive navbar showing the number of spots available for each day.
 ![view days](https://github.com/JoshGrant5/interview-scheduler/blob/master/public/images/gifs/view-days.gif) 
@@ -36,23 +36,23 @@ Testing:
 ### Delete an appointment and increase spots remaining for that day.
 ![delete appointment](https://github.com/JoshGrant5/interview-scheduler/blob/master/public/images/gifs/delete-appointment.gif) 
 
-# Setup
+## Setup
 
 Install dependencies with `npm install`.
 
-## Running Webpack Development Server
+### Running Webpack Development Server
 
 ```sh
 npm start
 ```
 
-## Running Jest Test Framework
+### Running Jest Test Framework
 
 ```sh
 npm test
 ```
 
-## Running Storybook Visual Testbed
+### Running Storybook Visual Testbed
 
 ```sh
 npm run storybook
