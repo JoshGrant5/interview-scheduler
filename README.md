@@ -1,6 +1,6 @@
 # LHL Scheduler
 
-Interview Scheduler a single-page React application that allows users to book and cancel interviews using a WebSocket server to build a realtime experience. 
+Interview Scheduler a single-page React application that allows users to book and cancel interviews using WebSockets to build a realtime experience. 
 
 [Click here](https://lhl-scheduler-jg.netlify.app/) to view application on Netlify.
 
