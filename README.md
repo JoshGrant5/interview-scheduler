@@ -4,11 +4,25 @@ Interview Scheduler a single-page React application that allows users to book an
 
 [Click here](https://lhl-scheduler-jg.netlify.app/) to view application on Netlify.
 
-Testing for this project was done with Jest, Cypress, and Storybook Visual Testbed.
+# Tech Stack:
+Front End:
+- React
+- Axios
+- SCSS
+
+Back End:
+- Node.js
+- WebSockets
+- PostgreSQL
+
+Testing:
+- Jest
+- Cypress
+- Storybook
 
 *Created in Weeks 7 and 8 of Lighthouse Labs Web Development Bootcamp.*
 
-# Visuals
+# Walkthrough
 
 ### Responsive navbar showing the number of spots available for each day.
 ![view days](https://github.com/JoshGrant5/interview-scheduler/blob/master/public/images/gifs/view-days.gif) 
